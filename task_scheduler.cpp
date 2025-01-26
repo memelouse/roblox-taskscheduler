@@ -1,5 +1,4 @@
 #include "task_scheduler.hpp"
-#include "../sdk/functions.hpp"
 #include "../driver/communications.hpp"
 
 uintptr_t task_scheduler::get_scheduler() {
