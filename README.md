@@ -1,6 +1,7 @@
-this is a simple way on how to get the renderview with the task scheduler.
+# roblox-taskscheduler
+This is a simple external method on how to get the renderview with the task scheduler.
 
-the offsets was updated on ```version-ecc9c250281b4c14```
+The last offset update was on ```version-ecc9c250281b4c14```
 
 
 # example
