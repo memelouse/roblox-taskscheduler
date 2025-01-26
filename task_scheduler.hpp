@@ -1,7 +1,5 @@
 #pragma once
-
 #include "../includes.h"
-// patched, dont use.
 
 namespace task_scheduler {
 	namespace offsets {
@@ -17,11 +15,11 @@ namespace task_scheduler {
 
 	uintptr_t get_scheduler();
 
-	std::vector<uintptr_t> active_jobs();
-	std::vector<uintptr_t> get_jobs(const std::string& name);
-	uintptr_t get_job(const std::string& name);
-	void print_jobs();
+	std::vector<uintptr_t> 	active_jobs();
+	std::vector<uintptr_t> 	get_jobs(const std::string& name);
+	uintptr_t 		get_job(const std::string& name);
+	void 			print_jobs();
 
-	uintptr_t get_renderview();
-	bool is_loaded();
+	uintptr_t 	get_renderview();
+	bool 		is_loaded();
 }
