@@ -13,7 +13,7 @@ std::vector<uintptr_t> task_scheduler::active_jobs() {
         uintptr_t ptr = driver->read<uintptr_t>(task_scheduler + i);
 
         if (RBX::get_string(ptr + offsets::job_name).empty())
-            continue;
+            continue; // some stuff doesnt just doesnt have a name
 
         if (driver->is_valid(ptr)) {
             jobs.push_back(ptr);
@@ -35,12 +35,12 @@ uintptr_t task_scheduler::get_job(const std::string& name) {
 
 void task_scheduler::print_jobs() {
     for (const auto& job : active_jobs()) {
-        printf(_("[DEBUG] Task Scheduler: <%s> 0x%llx\n"), RBX::get_string(job + offsets::job_name).c_str(), job);
+        printf("[DEBUG] Task Scheduler: <%s> 0x%llx\n", RBX::get_string(job + offsets::job_name).c_str(), job);
     }
 }
 
 uintptr_t task_scheduler::get_renderview() {
-    uintptr_t render_job = get_job(_("RenderJob"));
+    uintptr_t render_job = get_job("RenderJob");
 
     return driver->read<uintptr_t>(render_job + offsets::renderjob::renderview_ptr);
 }
@@ -58,5 +58,5 @@ std::vector<uintptr_t> task_scheduler::get_jobs(const std::string& name) {
 }
 
 bool task_scheduler::is_loaded() {
-    return get_jobs(_("WaitingHybridScriptsJob")).size() == 2;
+    return get_jobs("WaitingHybridScriptsJob").size() == 2;
 }
