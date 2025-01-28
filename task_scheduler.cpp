@@ -9,9 +9,12 @@ std::vector<uintptr_t> task_scheduler::active_jobs() {
     std::vector<uintptr_t> jobs;
     uintptr_t task_scheduler = get_scheduler();
 
-    for (uintptr_t i = 0x0; i <= offsets::size; i += sizeof(std::shared_ptr<void*>)) {
+    for (uintptr_t i = 0x0; i <= 0x500; i += sizeof(std::shared_ptr<void*>)) {
         uintptr_t ptr = driver->read<uintptr_t>(task_scheduler + i);
 
+        if (ptr == 0x0)
+            break; // no more pointer!!!
+        
         if (RBX::get_string(ptr + offsets::job_name).empty())
             continue; // some stuff doesnt just doesnt have a name
 
