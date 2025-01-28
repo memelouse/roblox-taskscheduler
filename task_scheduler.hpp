@@ -4,9 +4,7 @@
 namespace task_scheduler {
 	namespace offsets {
 		static uintptr_t task_scheduler_ptr = 0x5C71CC8; // version-ecc9c250281b4c14
-
 		static uintptr_t job_name = 0x90;
-		static uintptr_t size = 0x3C8; // getting the size manually lol
 
 		namespace renderjob {
 			static uintptr_t renderview_ptr = 0x218;
