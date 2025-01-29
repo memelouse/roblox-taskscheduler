@@ -2,12 +2,12 @@
 #include "../driver/communications.hpp"
 
 uintptr_t task_scheduler::get_scheduler() {
-    return driver->read<uintptr_t>(driver->base + offsets.task_scheduler_ptr);
+    return driver->read<uintptr_t>(driver->base + offsets::task_scheduler_ptr);
 }
 
 std::string task_scheduler::get_job_name(uintptr_t job) {
     // If the string is 16+ it will be stored in a pointer.
-    return RBX::get_string(job + offsets.job_name);
+    return RBX::get_string(job + offsets::job_name);
 }
 
 std::vector<uintptr_t> task_scheduler::active_jobs() {
@@ -64,7 +64,7 @@ void task_scheduler::print_jobs() {
 uintptr_t task_scheduler::get_renderview() {
     const uintptr_t render_job = get_job("RenderJob");
 
-    return driver->read<uintptr_t>(render_job + offsets.job_renderview_ptr);
+    return driver->read<uintptr_t>(render_job + offsets::job_renderview_ptr);
 }
 
 bool task_scheduler::is_loaded() {
