@@ -16,8 +16,8 @@ namespace task_scheduler {
 
 	std::vector<uintptr_t>	active_jobs();
 	std::vector<uintptr_t>	get_jobs(const std::string& name);
-	uintptr_t				get_job(const std::string& name);
-	void					print_jobs();
+	uintptr_t		get_job(const std::string& name);
+	void			print_jobs();
 
 	uintptr_t	get_renderview();
 	bool		is_loaded();
