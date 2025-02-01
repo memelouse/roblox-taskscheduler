@@ -6,7 +6,7 @@ uintptr_t task_scheduler::get_scheduler() {
 }
 
 std::string task_scheduler::get_job_name(uintptr_t job) {
-    // If the string is 16+ it will be stored in a pointer.
+    // If the string exceeds 16 characters, it will be stored as a pointer.
     return RBX::get_string(job + offsets::job_name);
 }
 
@@ -24,9 +24,8 @@ std::vector<uintptr_t> task_scheduler::active_jobs() {
         if (get_job_name(job).empty())
             continue; // Skip jobs without a name
 
-        if (driver->is_valid(job)) {
+        if (driver->is_valid(job))
             jobs.push_back(job);
-        }
     }
 
     return jobs;
@@ -37,9 +36,8 @@ std::vector<uintptr_t> task_scheduler::get_jobs(const std::string& name) {
 
     // Filter out jobs by matching the provided name
     for (const auto& job : active_jobs()) {
-        if (get_job_name(job) == name) {
+        if (get_job_name(job) == name)
             result.push_back(job);
-        }
     }
 
     return result;
@@ -47,9 +45,8 @@ std::vector<uintptr_t> task_scheduler::get_jobs(const std::string& name) {
 
 uintptr_t task_scheduler::get_job(const std::string& name) {
     for (const auto& job : active_jobs()) {
-        if (get_job_name(job) == name) {
+        if (get_job_name(job) == name)
             return job;
-        }
     }
 
     return 0x0;
