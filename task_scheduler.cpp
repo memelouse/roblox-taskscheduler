@@ -7,6 +7,23 @@ uintptr_t task_scheduler::get_scheduler() {
 
 std::string task_scheduler::get_job_name(uintptr_t job) {
     // If the string exceeds 16 characters, it will be stored as a pointer.
+    
+    /*
+    * here is an example
+    uintptr_t to_read = job + offsets.job_name;
+    const int length = driver->read<int>(to_read + 0x18); // string size
+
+    if (length >= 16) {
+        uintptr_t ptr = driver->read<uintptr_t>(to_read);
+        to_read = ptr;
+    }
+
+    std::vector<char> buffer(256);
+    driver->read_phys_memory(reinterpret_cast<PVOID>(to_read), buffer.data(), buffer.size());
+
+    return std::string(buffer.data());
+    */
+    
     return RBX::get_string(job + offsets::job_name);
 }
 
