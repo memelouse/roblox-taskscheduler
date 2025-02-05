@@ -2,6 +2,11 @@
 #include "../driver/communications.hpp"
 
 uintptr_t task_scheduler::get_scheduler() {
+    /*
+    uintptr task_scheduler_ptr = driver->pattern_scan(_("?? ?? ?? ?? ?? ?? 00 00 11 11 11 11 11 11 71 3f 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00"), 0x28);
+    return driver->read<uintptr_t>(task_scheduler_ptr);
+    */
+    
     return driver->read<uintptr_t>(driver->base + offsets::task_scheduler_ptr);
 }
 
