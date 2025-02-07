@@ -38,7 +38,8 @@ std::vector<uintptr_t> task_scheduler::active_jobs() {
 
     // Scan through possible job entries (size of each pointer is the size of std::shared_ptr<void*> = 0x8)
     // As of right now i have no method on getting the size.
-    for (uintptr_t i = 0x0; i <= 0x500; i += sizeof(std::shared_ptr<void*>)) {
+    uintptr_t job_count = driver->read<uintptr_t>(task_scheduler - sizeof(uintptr_t));
+    for (uintptr_t i = 0x0; i <= job_count; i += sizeof(std::shared_ptr<void*>)) {
         uintptr_t job = driver->read<uintptr_t>(task_scheduler + i);
 
         if (job == 0x0)
