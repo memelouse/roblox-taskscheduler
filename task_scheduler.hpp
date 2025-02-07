@@ -1,5 +1,7 @@
 #pragma once
-#include "../includes.h"
+#include <vector>
+#include <string>
+#include <cstdint>
 
 namespace task_scheduler {
 	namespace offsets {
