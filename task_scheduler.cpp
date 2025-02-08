@@ -87,6 +87,12 @@ uintptr_t task_scheduler::get_renderview() {
     return driver->read<uintptr_t>(render_job + offsets::job_renderview_ptr);
 }
 
+uintptr_t task_scheduler::get_datamodel() {
+    const uintptr_t render_job = get_job("RenderJob");
+
+    return driver->read<uintptr_t>(render_job + offsets::datamodel_ptr) + offsets::datamodel_offset;
+}
+
 bool task_scheduler::is_loaded() {
     // Check if there are no active jobs (indicating the scheduler isn't loaded/not found)
     return active_jobs().size() != 0;
