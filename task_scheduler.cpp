@@ -93,6 +93,13 @@ uintptr_t task_scheduler::get_datamodel() {
     return driver->read<uintptr_t>(render_job + offsets::datamodel_ptr) + offsets::datamodel_offset;
 }
 
+uintptr_t task_scheduler::get_visualengine() {
+    const uintptr_t render_job = get_job("RenderJob");
+
+    uintptr_t renderview = driver->read<uintptr_t>(render_job + offsets::job_renderview_ptr);
+    return driver->read<uintptr_t>(renderview + offsets::visualengine_ptr);
+}
+
 bool task_scheduler::is_loaded() {
     // Check if there are no active jobs (indicating the scheduler isn't loaded/not found)
     return active_jobs().size() != 0;
