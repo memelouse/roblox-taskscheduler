@@ -77,7 +77,7 @@ uintptr_t task_scheduler::get_job(const std::string& name) {
 
 void task_scheduler::print_jobs() {
     for (const auto& job : active_jobs()) {
-        printf("[DEBUG] Task Scheduler: Found job at <0x%llx - %s>\n", job, get_job_name(job).c_str());
+        printf("Task Scheduler: Found job at <0x%llx - %s>\n", job, get_job_name(job).c_str());
     }
 }
 
