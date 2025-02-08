@@ -30,5 +30,6 @@ namespace task_scheduler {
 	uintptr_t	get_renderview();
 	uintptr_t	get_datamodel();
 	uintptr_t	get_visualengine();
+	
 	bool		is_loaded();
 }
