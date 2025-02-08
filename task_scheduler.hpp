@@ -12,6 +12,8 @@ namespace task_scheduler {
 		namespace renderjob {
 			static uintptr_t renderview_ptr = 0x218;
 
+			static uintptr_t visualengine_ptr = 0x10;
+
 			static uintptr_t datamodel_ptr = 0xB0;
 			static uintptr_t datamodel_offset = 0x190;
 		}
@@ -27,5 +29,6 @@ namespace task_scheduler {
 
 	uintptr_t	get_renderview();
 	uintptr_t	get_datamodel();
+	uintptr_t	get_visualengine();
 	bool		is_loaded();
 }
