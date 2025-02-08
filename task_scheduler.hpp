@@ -11,7 +11,6 @@ namespace task_scheduler {
 
 		namespace renderjob {
 			static uintptr_t renderview_ptr = 0x218;
-
 			static uintptr_t visualengine_ptr = 0x10;
 
 			static uintptr_t datamodel_ptr = 0xB0;
