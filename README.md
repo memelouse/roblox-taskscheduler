@@ -1,5 +1,5 @@
 # roblox-taskscheduler
-This is a simple external method for finding (renderview, datamodel, visualengine) using the task scheduler.
+This is a simple external method for finding (RenderView, DataModel, VisualEngine) using the task scheduler.
 
 The project will be updated with each new Roblox version until I decide to discontinue it.
 
