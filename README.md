@@ -13,5 +13,11 @@ if (task_scheduler::is_loaded()) {
   
   uintptr_t renderview = task_scheduler::get_renderview();
   printf("renderview = 0x%llx\n", renderview);
+
+  uintptr_t datamodel = task_scheduler::get_datamodel();
+  printf("datamodel = 0x%llx\n", datamodel);
+
+  uintptr_t visualengine = task_scheduler::get_visualengine();
+  printf("visualengine = 0x%llx\n", visualengine);
 }
 ```
