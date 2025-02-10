@@ -37,7 +37,7 @@ std::vector<uintptr_t> task_scheduler::active_jobs() {
     uintptr_t task_scheduler = get_scheduler();
 
     __int64 scheduler_metadata = driver->read<__int64>(task_scheduler - sizeof(__int64));
-    int total_jobs = (scheduler_metadata >> 16) & 0xFFFF; // Not sure about this
+    int total_jobs = (scheduler_metadata >> 54) & 0x3F; // Not sure about this
 
     // Scan through possible job entries
     for (uintptr_t job = driver->read<uintptr_t>(task_scheduler), job_index = 0;
