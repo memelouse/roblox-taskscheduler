@@ -36,13 +36,13 @@ std::vector<uintptr_t> task_scheduler::active_jobs() {
     std::vector<uintptr_t> jobs;
     uintptr_t task_scheduler = get_scheduler();
 
-    __int64 scheduler_metadata = driver->read<__int64>(task_scheduler - sizeof(__int64));
-    int total_jobs = (scheduler_metadata >> 54) & 0x3F; // Not sure about this
+    uint64_t scheduler_metadata = driver->read<uint64_t>(task_scheduler - sizeof(uint64_t));
+    int p_total_jobs = (scheduler_metadata >> 54) & 0x3F; // Not sure about this
 
     // Scan through possible job entries
     for (uintptr_t job = driver->read<uintptr_t>(task_scheduler), job_index = 0;
-        job_index <= total_jobs && job != 0x0;
-        job_index += sizeof(std::shared_ptr<void*>), job = driver->read<uintptr_t>(task_scheduler + job_index)) {
+        job_index <= p_total_jobs && job != 0x0;
+        job_index += 1, job = driver->read<uintptr_t>(task_scheduler + (job_index * sizeof(std::shared_ptr<void*>)))) {
 
         if (get_job_name(job).empty())
             continue; // Skip jobs without a name
