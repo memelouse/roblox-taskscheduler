@@ -6,7 +6,7 @@
 namespace task_scheduler {
 	namespace offsets {
 		// (?? ?? ?? ?? ?? ?? 00 00 11 11 11 11 11 11 71 3f 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00) + 0x24
-		static uintptr_t task_scheduler_ptr = 0x5E0C738;
+		static uintptr_t task_scheduler_ptr = 0x5E723A8;
 		static uintptr_t job_name = 0x90;
 
 		namespace renderjob {
