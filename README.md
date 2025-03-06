@@ -3,7 +3,7 @@ This is a simple external method for finding (RenderView, DataModel, VisualEngin
 
 The project will be updated with each new Roblox version until I decide to discontinue it.
 
-The latest offset update was in ```version-67acd0f240534e7b```
+The latest offset update was in ```version-8794089906d54893```
 
 If you encounter any issues, feel free to contact me on Discord.
 # example
