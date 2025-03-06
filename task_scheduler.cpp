@@ -1,21 +1,20 @@
 #include "task_scheduler.hpp"
-#include "../driver/communications.hpp"
 
-uintptr_t task_scheduler::get_scheduler() {
-    /*
-    uintptr task_scheduler_ptr = driver->pattern_scan(_("11 11 11 11 11 11 71 3f 00 00 00 00 00 00"), 0x20);
-    return driver->read<uintptr_t>(task_scheduler_ptr);
+uintptr_t task_scheduler::get_address() {
+	/*
+    uintptr_t task_scheduler = driver->find_pattern(driver->base, "11 11 11 11 11 11 71 3f 00 00 00 00 00 00", 0x20);
+    return task_scheduler;
     */
-    
-    return driver->read<uintptr_t>(driver->base + offsets::task_scheduler_ptr);
+
+    return driver->read<uintptr_t>(driver->base + offsets::task_scheduler_offset);
+}
+
+uintptr_t task_scheduler::get_array_size() {
+	return driver->read<uintptr_t>(driver->base + offsets::task_scheduler_offset + 0x8);
 }
 
 std::string task_scheduler::get_job_name(uintptr_t job) {
-    // If the string exceeds 16 characters, it will be stored as a pointer.
-    
-    /*
-    * here is an example
-    uintptr_t to_read = job + offsets.job_name;
+    uintptr_t to_read = job + offsets::job_name;
     const int length = driver->read<int>(to_read + 0x18); // string size
 
     if (length >= 16) {
@@ -24,30 +23,29 @@ std::string task_scheduler::get_job_name(uintptr_t job) {
     }
 
     std::vector<char> buffer(256);
-    driver->read_phys_memory(reinterpret_cast<PVOID>(to_read), buffer.data(), buffer.size());
+    driver->read_physical(to_read, buffer.data(), buffer.size());
 
     return std::string(buffer.data());
-    */
-    
-    return RBX::get_string(job + offsets::job_name);
 }
 
-std::vector<uintptr_t> task_scheduler::active_jobs() {
+std::vector<uintptr_t> task_scheduler::get_array() {
     std::vector<uintptr_t> jobs;
-    uintptr_t task_scheduler = get_scheduler();
 
-    uint64_t scheduler_metadata = driver->read<uint64_t>(task_scheduler - sizeof(uint64_t));
-    int p_total_jobs = (scheduler_metadata >> 54) & 0x3F; // Not sure about this
+    uintptr_t task_scheduler = get_address();
+	uintptr_t size_ptr = get_array_size();
 
-    // Scan through possible job entries
-    for (uintptr_t job = driver->read<uintptr_t>(task_scheduler), job_index = 0;
-        job_index <= p_total_jobs && job != 0x0;
-        job_index += 1, job = driver->read<uintptr_t>(task_scheduler + (job_index * sizeof(std::shared_ptr<void*>)))) {
+    for (uintptr_t job = driver->read<uintptr_t>(task_scheduler), i = 0;
+        task_scheduler + i < size_ptr;
+        i += 0x8, job = driver->read<uintptr_t>(task_scheduler + i)) {
+
+        if (!job)
+            continue;
 
         if (get_job_name(job).empty())
             continue; // Skip jobs without a name
 
-        jobs.push_back(job);
+        if (driver->is_valid(job))
+            jobs.push_back(job);
     }
 
     return jobs;
@@ -57,7 +55,7 @@ std::vector<uintptr_t> task_scheduler::get_jobs(const std::string& name) {
     std::vector<uintptr_t> result;
 
     // Filter out jobs by matching the provided name
-    for (const auto& job : active_jobs()) {
+    for (const auto& job : get_array()) {
         if (get_job_name(job) == name)
             result.push_back(job);
     }
@@ -66,7 +64,7 @@ std::vector<uintptr_t> task_scheduler::get_jobs(const std::string& name) {
 }
 
 uintptr_t task_scheduler::get_job(const std::string& name) {
-    for (const auto& job : active_jobs()) {
+    for (const auto& job : get_array()) {
         if (get_job_name(job) == name)
             return job;
     }
@@ -75,7 +73,7 @@ uintptr_t task_scheduler::get_job(const std::string& name) {
 }
 
 void task_scheduler::print_jobs() {
-    for (const auto& job : active_jobs()) {
+    for (const auto& job : get_array()) {
         printf("Task Scheduler: Found job at <0x%llx - %s>\n", job, get_job_name(job).c_str());
     }
 }
@@ -83,20 +81,20 @@ void task_scheduler::print_jobs() {
 uintptr_t task_scheduler::get_renderview() {
     const uintptr_t render_job = get_job("RenderJob");
 
-    return driver->read<uintptr_t>(render_job + offsets::job_renderview_ptr);
+    return driver->read<uintptr_t>(render_job + offsets::renderjob::renderview_ptr);
 }
 
 uintptr_t task_scheduler::get_datamodel() {
     const uintptr_t render_job = get_job("RenderJob");
 
-    return driver->read<uintptr_t>(render_job + offsets::datamodel_ptr) + offsets::datamodel_offset;
+    return driver->read<uintptr_t>(render_job + offsets::renderjob::datamodel_ptr) + offsets::renderjob::datamodel_offset;
 }
 
 uintptr_t task_scheduler::get_visualengine() {
     const uintptr_t render_job = get_job("RenderJob");
 
-    uintptr_t renderview = driver->read<uintptr_t>(render_job + offsets::job_renderview_ptr);
-    return driver->read<uintptr_t>(renderview + offsets::visualengine_ptr);
+    uintptr_t renderview = driver->read<uintptr_t>(render_job + offsets::renderjob::renderview_ptr);
+    return driver->read<uintptr_t>(renderview + offsets::renderjob::visualengine_ptr);
 }
 
 bool task_scheduler::is_loaded() {
