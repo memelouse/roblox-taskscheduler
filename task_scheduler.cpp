@@ -96,5 +96,5 @@ uintptr_t task_scheduler::get_visualengine() {
 
 bool task_scheduler::is_loaded() {
     // Check if there are no active jobs (indicating the scheduler isn't loaded/not found)
-    return active_jobs().size() != 0;
+    return get_array().size() != 0;
 }
