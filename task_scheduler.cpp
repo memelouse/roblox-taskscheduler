@@ -31,20 +31,17 @@ std::string task_scheduler::get_job_name(uintptr_t job) {
 std::vector<uintptr_t> task_scheduler::get_array() {
     std::vector<uintptr_t> jobs;
 
-    uintptr_t task_scheduler = get_address();
-	uintptr_t size_ptr = get_array_size();
+    const uintptr_t task_scheduler = get_address();
+	const uintptr_t size_ptr = get_array_size();
 
     for (uintptr_t job = driver->read<uintptr_t>(task_scheduler), i = 0;
         task_scheduler + i < size_ptr;
         i += 0x8, job = driver->read<uintptr_t>(task_scheduler + i)) {
 
-        if (!job)
-            continue;
-
         if (get_job_name(job).empty())
             continue; // Skip jobs without a name
 
-        if (driver->is_valid(job))
+        if (job)
             jobs.push_back(job);
     }
 
