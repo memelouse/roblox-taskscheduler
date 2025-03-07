@@ -36,7 +36,7 @@ std::vector<uintptr_t> task_scheduler::get_array() {
 
     for (uintptr_t job = driver->read<uintptr_t>(task_scheduler), i = 0;
         task_scheduler + i < size_ptr;
-        i += 0x8, job = driver->read<uintptr_t>(task_scheduler + i)) {
+        i += 0x10, job = driver->read<uintptr_t>(task_scheduler + i)) {
 
         if (get_job_name(job).empty())
             continue; // Skip jobs without a name
