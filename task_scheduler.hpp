@@ -6,7 +6,7 @@
 
 namespace task_scheduler {
 	namespace offsets {
-		// (11 11 11 11 11 11 71 3f 00 00 00 00 00 00) + 0x20
+		// "11 11 11 11 11 11 71 3f 00 00 00 00 00 00" + 0x20
 		static uintptr_t task_scheduler_offset = 0x5F15BD0;
 		static uintptr_t job_name = 0x90;
 
