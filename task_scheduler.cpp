@@ -2,7 +2,7 @@
 
 uintptr_t task_scheduler::get_address() {
 	/*
-    uintptr_t task_scheduler = driver->find_pattern(driver->base, "11 11 11 11 11 11 71 3f 00 00 00 00 00 00", 0x20);
+    uintptr_t task_scheduler = driver->find_pattern(driver->base, "11 11 11 11 11 11 71 3f 00 00 00 00 00 00", 0x20); // base address, signature, offset
     return task_scheduler;
     */
 
