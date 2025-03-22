@@ -1,14 +1,15 @@
 # Roblox Task Scheduler
-
 A lightweight, external method to get (`RenderView`, `DataModel`, `VisualEngine`) using the task scheduler.
 
 ## Overview
-
 It is actively maintained and updated with each new Roblox version—until I decide to discontinue support.
 
 ## Latest Update
 - **Version**: `version-bef193a8f3d14d3c`  
 - **Last Offset Update**: 12/03/2025
+
+## offsets.json
+This file delivers automatically updated offsets, allowing you to retrieve them directly.
 
 ## Example
 ```cpp
