@@ -7,15 +7,15 @@
 namespace task_scheduler {
 	namespace offsets {
 		// "11 11 11 11 11 11 71 3f 00 00 00 00 00 00" + 0x20
-		static uintptr_t task_scheduler_offset = 0x625C580;
-		static uintptr_t job_name = 0x90;
+		static uintptr_t task_scheduler_offset = 0x62A1990;
+		static uintptr_t job_name = 0x138;
 
 		namespace renderjob {
 			static uintptr_t renderview_ptr = 0x218;
 			static uintptr_t visualengine_ptr = 0x10;
 
-			static uintptr_t datamodel_ptr = 0xB0;
-			static uintptr_t datamodel_offset = 0x1A0;
+			static uintptr_t datamodel_ptr = 0x208;
+			static uintptr_t datamodel_offset = 0x1B0;
 		}
 	}
 
