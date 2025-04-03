@@ -51,7 +51,7 @@ std::vector<uintptr_t> task_scheduler::get_jobs(const std::string& name) {
     std::vector<uintptr_t> result;
 
     for (const auto& job : get_array()) {
-        if (get_job_name(job) == name)
+        if (get_job_name(job).find(name) != std::string::npos)
             result.push_back(job);
     }
 
@@ -60,7 +60,7 @@ std::vector<uintptr_t> task_scheduler::get_jobs(const std::string& name) {
 
 uintptr_t task_scheduler::get_job(const std::string& name) {
     for (const auto& job : get_array()) {
-        if (get_job_name(job) == name)
+        if (get_job_name(job).find(name) != std::string::npos)
             return job;
     }
 
@@ -74,19 +74,21 @@ void task_scheduler::print_jobs() {
 }
 
 uintptr_t task_scheduler::get_renderview() {
-    uintptr_t render_job = get_job("RenderJob(EarlyRendering;Ugc)");
+    // RenderJob(EarlyRendering;LuaApp) / RenderJob(EarlyRendering;Ugc)
+    // The job name varies depending on whether you are in-game or in the menu.
+    uintptr_t render_job = get_job("RenderJob(EarlyRendering");
 
     return driver->read<uintptr_t>(render_job + offsets::renderjob::renderview_ptr);
 }
 
 uintptr_t task_scheduler::get_datamodel() {
-    uintptr_t render_job = get_job("RenderJob(EarlyRendering;Ugc)");
+    uintptr_t render_job = get_job("RenderJob(EarlyRendering");
 
     return driver->read<uintptr_t>(render_job + offsets::renderjob::datamodel_ptr) + offsets::renderjob::datamodel_offset;
 }
 
 uintptr_t task_scheduler::get_visualengine() {
-    uintptr_t render_job = get_job("RenderJob(EarlyRendering;Ugc)");
+    uintptr_t render_job = get_job("RenderJob(EarlyRendering");
 
     uintptr_t renderview = driver->read<uintptr_t>(render_job + offsets::renderjob::renderview_ptr);
     return driver->read<uintptr_t>(renderview + offsets::renderjob::visualengine_ptr);
