@@ -6,9 +6,12 @@
 
 enum offsets : uintptr_t {
 	TASK_SCHEDULER = 0x69CD240,
+
 	JOB_NAME = 0x138,
+
 	RENDER_VIEW_PTR = 0x218,
 	VISUAL_ENGINE_PTR = 0x10,
+
 	DATA_MODEL_PTR = 0x208,
 	DATA_MODEL = 0x1B0
 };
