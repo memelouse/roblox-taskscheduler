@@ -4,33 +4,41 @@
 #include <string>
 #include <cstdint>
 
-namespace task_scheduler {
-	namespace offsets {
-		// "11 11 11 11 11 11 71 3f 00 00 00 00 00 00" + 0x20
-		static uintptr_t task_scheduler_offset = 0x69CD240;
-		static uintptr_t job_name = 0x138;
+enum offsets : uintptr_t {
+	TASK_SCHEDULER = 0x69CD240,
+	JOB_NAME = 0x138,
+	RENDER_VIEW_PTR = 0x218,
+	VISUAL_ENGINE_PTR = 0x10,
+	DATA_MODEL_PTR = 0x208,
+	DATA_MODEL = 0x1B0
+};
 
-		namespace renderjob {
-			static uintptr_t renderview_ptr = 0x218;
-			static uintptr_t visualengine_ptr = 0x10;
+class job_t final {
+public:
+	job_t() {};
+	job_t(uintptr_t address) : address(address) {};
 
-			static uintptr_t datamodel_ptr = 0x208;
-			static uintptr_t datamodel_offset = 0x1B0;
-		}
-	}
+	std::string get_name();
 
-	uintptr_t	get_address();
-	uintptr_t 	get_array_size();
-	std::string	get_job_name(uintptr_t job);
+	uintptr_t address = 0;
+};
 
-	std::vector<uintptr_t>	get_array();
-	std::vector<uintptr_t>	get_jobs(const std::string& name);
-	uintptr_t				get_job(const std::string& name);
-	void					print_jobs();
+class task_scheduler_t final {
+public:
+	task_scheduler_t() {};
 
-	uintptr_t	get_renderview();
-	uintptr_t	get_datamodel();
-	uintptr_t	get_visualengine();
+	uintptr_t get_renderview();
+	uintptr_t get_datamodel();
+	uintptr_t get_visualengine();
 
-	bool		is_loaded();
-}
+	bool is_loaded() { return this->get_all_jobs().size() > 0; }
+	void print_jobs();
+
+private:
+	uintptr_t get_job_array_start();
+	uintptr_t get_job_array_end();
+
+	std::vector<job_t> get_all_jobs();
+
+	uintptr_t get_job(const std::string& name);
+};

@@ -15,21 +15,23 @@ It is actively maintained and updated with each new Roblox version—until I dec
 #include "task_scheduler.hpp"
 
 int main() {
-    if (task_scheduler::is_loaded()) {
-        // print all active jobs within the task scheduler
-        task_scheduler::print_jobs();
+    auto task_scheduler = std::make_unique<task_scheduler_t>();
 
-        // get and display the RenderView address
-        uintptr_t renderview = task_scheduler::get_renderview();
-        printf("RenderView = 0x%llx\n", renderview);
+    if (task_scheduler->is_loaded()) {
+        // Print all active jobs within the task scheduler.
+        task_scheduler->print_jobs();
 
-        // get and display the DataModel address
-        uintptr_t datamodel = task_scheduler::get_datamodel();
-        printf("DataModel = 0x%llx\n", datamodel);
+        // Get and display the RenderView address.
+        uintptr_t renderview = task_scheduler->get_renderview();
+        printf("RenderView: 0x%llx\n", renderview);
 
-        // get and display the VisualEngine address
-        uintptr_t visualengine = task_scheduler::get_visualengine();
-        printf("VisualEngine = 0x%llx\n", visualengine);
+        // Get and display the DataModel address.
+        uintptr_t datamodel = task_scheduler->get_datamodel();
+        printf("DataModel: 0x%llx\n", datamodel);
+
+        // Get and display the VisualEngine address.
+        uintptr_t visualengine = task_scheduler->get_visualengine();
+        printf("VisualEngine: 0x%llx\n", visualengine);
     }
 
     return 0;
