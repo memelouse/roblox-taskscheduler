@@ -13,7 +13,7 @@ enum offsets : uintptr_t {
 	VISUAL_ENGINE_PTR = 0x10,
 
 	DATA_MODEL_PTR = 0x208,
-	DATA_MODEL = 0x1B0
+	DATA_MODEL = 0x1B8
 };
 
 class job_t final {
