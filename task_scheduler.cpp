@@ -55,7 +55,7 @@ void task_scheduler_t::print_jobs() {
 }
 
 uintptr_t task_scheduler_t::get_renderview() {
-    uintptr_t render_job = this->get_job("RenderJob(EarlyRendering");
+    uintptr_t render_job = this->get_job("RenderJob(PostRender");
     if (!render_job)
         return 0;
 
@@ -63,7 +63,7 @@ uintptr_t task_scheduler_t::get_renderview() {
 }
 
 uintptr_t task_scheduler_t::get_datamodel() {
-    uintptr_t render_job = this->get_job("RenderJob(EarlyRendering");
+    uintptr_t render_job = this->get_job("RenderJob(PostRender");
     if (!render_job)
         return 0;
 
