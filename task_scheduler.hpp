@@ -12,7 +12,7 @@ enum offsets : uintptr_t {
 	RENDER_VIEW_PTR = 0x218,
 	VISUAL_ENGINE_PTR = 0x10,
 
-	DATA_MODEL_PTR = 0x38,
+	DATA_MODEL_PTR = 0x208,
 	DATA_MODEL = 0x1B8
 };
 
