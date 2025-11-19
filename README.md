@@ -4,11 +4,11 @@ A lightweight, external method to get (`RenderView`, `DataModel`, `VisualEngine`
 
 ## Overview
 
-It is actively maintained and updated with each new Roblox version—until I decide to discontinue support.
+It is actively maintained and updated with each new Roblox version, until I decide to discontinue support.
 
 ## Latest Update
-- **Version**: `version-b7e223555d904550`
-- **Last Offset Update**: 11/11/2025
+- **Version**: `version-fdda949d95e447e3`
+- **Last Offset Update**: 19/11/2025
 
 ## Example
 ```cpp
