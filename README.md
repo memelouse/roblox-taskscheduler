@@ -7,8 +7,8 @@ A lightweight, external method to get (`RenderView`, `DataModel`, `VisualEngine`
 It is actively maintained and updated with each new Roblox version, until I decide to discontinue support.
 
 ## Latest Update
-- **Version**: `version-df7528517c6849f7`
-- **Last Offset Update**: 18/02/2026
+- **Version**: `version-760d064d05424689`
+- **Last Offset Update**: 26/02/2026
 
 ## Example
 ```cpp

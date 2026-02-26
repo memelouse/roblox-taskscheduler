@@ -15,11 +15,13 @@ std::string job_t::get_name() {
 
 
 uintptr_t task_scheduler_t::get_job_array_start() {
-    return driver->read<uintptr_t>(driver->base + offsets::TASK_SCHEDULER);
+    uintptr_t task_scheduler = driver->read<uintptr_t>(driver->base + offsets::TASK_SCHEDULER);
+    return driver->read<uintptr_t>(task_scheduler + offsets::ARRAY_PTR);
 }
 
 uintptr_t task_scheduler_t::get_job_array_end() {
-    return driver->read<uintptr_t>(driver->base + offsets::TASK_SCHEDULER + sizeof(uintptr_t));
+    uintptr_t task_scheduler = driver->read<uintptr_t>(driver->base + offsets::TASK_SCHEDULER);
+    return driver->read<uintptr_t>(task_scheduler + offsets::ARRAY_PTR + sizeof(uintptr_t));
 }
 
 std::vector<job_t> task_scheduler_t::get_all_jobs() {
