@@ -5,7 +5,7 @@
 #include <cstdint>
 
 enum offsets : uintptr_t {
-	TASK_SCHEDULER = 0x7A08710,
+	TASK_SCHEDULER = 0x8428188,
 	ARRAY_PTR = 0xC8,
 
 	JOB_NAME = 0xF0,
